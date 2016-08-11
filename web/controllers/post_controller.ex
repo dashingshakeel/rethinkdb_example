@@ -29,18 +29,18 @@ alias RethinkDatabase, as: DB
   end
 
   def show(conn, %{"id" => id}) do
-    post = DB.get!(Post, id)
+    post = DB.get(Post, id)
     render(conn, "show.html", post: post)
   end
 
   def edit(conn, %{"id" => id}) do
-    post = DB.get!(Post, id)
+    post = DB.get(Post, id)
     changeset = Post.changeset(post)
     render(conn, "edit.html", post: post, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "post" => post_params}) do
-    post = DB.get!(Post, id)
+    post = DB.get(Post, id)
     changeset = Post.changeset(post, post_params)
 
     case DB.update(changeset) do
@@ -54,11 +54,11 @@ alias RethinkDatabase, as: DB
   end
 
   def delete(conn, %{"id" => id}) do
-    post = DB.get!(Post, id)
+    post = DB.get(Post, id)
 
     # Here we use delete! (with a bang) because we expect
     # it to always work (and if it does not, it will raise).
-   DB.delete!(post)
+   DB.delete(post)
 
     conn
     |> put_flash(:info, "Post deleted successfully.")
