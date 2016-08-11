@@ -9,9 +9,12 @@ defmodule RethinkdbExample do
     # Define workers and child supervisors to be supervised
     children = [
       # Start the Ecto repository
-      supervisor(RethinkdbExample.Repo, []),
       # Start the endpoint when the application starts
       supervisor(RethinkdbExample.Endpoint, []),
+
+
+
+      worker(RethinkDatabase, [[port: 28015, host: "localhost", db: :rethinkdb_example]]),
       # Start your own worker by calling: RethinkdbExample.Worker.start_link(arg1, arg2, arg3)
       # worker(RethinkdbExample.Worker, [arg1, arg2, arg3]),
     ]
