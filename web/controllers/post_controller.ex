@@ -1,6 +1,6 @@
 defmodule RethinkdbExample.PostController do
   use RethinkdbExample.Web, :controller
-alias RethinkDatabase, as: DB
+  alias RethinkDatabase, as: DB
   alias RethinkdbExample.Post
 
   plug :scrub_params, "post" when action in [:create, :update]
